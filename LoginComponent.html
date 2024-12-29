@@ -1,0 +1,32 @@
+<template>
+  <div>
+    <input v-model="username" placeholder="Username"/>
+    <input v-model="password" type="password" placeholder="Password"/>
+    <button @click="login">Login</button>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      username: '',
+      password: '',
+    };
+  },
+  methods: {
+    async login() {
+      try {
+        const response = await this.$http.post('/login', {
+          username: this.username,
+          password: this.password,
+        });
+        localStorage.setItem('token', response.data.token); // 假设后端返回JWT
+        this.$router.push('/admin/dashboard');
+      } catch (error) {
+        console.error('Login failed:', error);
+      }
+    },
+  },
+};
+</script>

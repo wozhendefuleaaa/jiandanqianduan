@@ -1,0 +1,19 @@
+<template>
+  <div v-if="isAuthenticated">
+    Welcome to the Admin Dashboard!
+    <!-- 更多管理界面内容 -->
+  </div>
+  <div v-else>
+    Please log in to access the admin dashboard.
+  </div>
+</template>
+
+<script>
+export default {
+  computed: {
+    isAuthenticated() {
+      return !!localStorage.getItem('token');
+    },
+  },
+};
+</script>
